@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDaprStarter(builder.Configuration.GetSection("DaprOptions"));
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -31,10 +33,5 @@ class Data
     /// Ãû³Æ
     /// </summary>
     public string? Name { get; set; }
-
-    /// <summary>
-    /// Token
-    /// </summary>
-    public string? Token { get; set; }
 }
 

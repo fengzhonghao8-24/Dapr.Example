@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDaprStarter(builder.Configuration.GetSection("DaprOptions"));
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -15,9 +17,9 @@ if (app.Environment.IsDevelopment())
 }
 
 var client = new DaprClientBuilder().Build();
-app.MapGet("/test/serviceA", async () =>
+app.MapGet("/test/servicea", async () =>
 {
-    var appId = "masa-dapr-test";
+    var appId = "service-a";
 
     var resp = await client.InvokeMethodAsync<Data>(HttpMethod.Get, appId, "/GetServiceA");
 
@@ -29,7 +31,7 @@ app.MapGet("/test/serviceA", async () =>
     return operation;
 });
 
-app.MapPost("/test/serviceB", async () =>
+app.MapPost("/test/serviceb", async () =>
 {
     var appId = "service-b";
 
@@ -55,11 +57,6 @@ class Data
     /// Ãû³Æ
     /// </summary>
     public string? Name { get; set; }
-
-    /// <summary>
-    /// Token
-    /// </summary>
-    public string? Token { get; set; }
 }
 
 

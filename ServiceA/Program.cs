@@ -33,9 +33,4 @@ class Data
     /// Ãû³Æ
     /// </summary>
     public string? Name { get; set; }
-
-    /// <summary>
-    /// Token
-    /// </summary>
-    public string? Token { get; set; }
 }
